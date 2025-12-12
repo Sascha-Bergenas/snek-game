@@ -1,13 +1,12 @@
 export class Snake {
-  constructor(startPosition, color = "green", name = "Player") {
-    // segments är huvudet.
+  constructor(snakePart, color = "green", name = "Player") {
     // flyttar kroppen genom att lägga till nytt huvud och ta bort sista segmentet.
-    this.segments = [
+    this.snake = [
       {
-        x: startPosition.x,
-        y: startPosition.y,
+        x: snakePart.x,
+        y: snakePart.y,
       },
-      { x: startPosition.x - 1, y: startPosition.y }, // startlängd börjar som 2 segment
+      { x: snakePart.x - 1, y: snakePart.y }, // startlängd börjar som 2 segment
     ];
 
     /*
@@ -34,12 +33,12 @@ export class Snake {
       this.nextDirection = newDirection;
     }
   }
-  move() {
-    // Applicera input för detta tick
+  moveSnake() {
+    // applicera input för detta tick
     this.direction = this.nextDirection;
 
     // hämtar huvudets position
-    const head = this.segments[0];
+    const head = this.snake[0];
 
     // beräkna nytt huvud
     const newHead = {
@@ -47,28 +46,28 @@ export class Snake {
       y: head.y + this.direction.y,
     };
     // Lägg in nytt huvud först
-    this.segments.unshift(newHead);
+    this.snake.unshift(newHead);
 
     // om ormen inte ska växa, ta bort sista segmentet
     if (!this.shouldGrow) {
-      this.segments.pop();
+      this.snake.pop();
     } else {
       this.shouldGrow = false;
     }
   }
   // lägger till segment om ormen ska växa
-  grow() {
+  snakeGrow() {
     this.shouldGrow = true;
   }
   // kontrollera vart huvud är
-  getHead() {
-    return this.segments[0];
+  getSnakeHead() {
+    return this.snake[0];
   }
   //  kontrollera ifall huvudet är i kroppen
   collideWithSelf() {
     const head = this.getHead();
-    for (let i = 1; i < globalThis.segments.length; i++) {
-      const segment = this.segments[i];
+    for (let i = 1; i < globalThis.snake.length; i++) {
+      const segment = this.snake[i];
       if (segment.x === head.x && segment.y === head.y) {
         return true;
       }
@@ -77,7 +76,7 @@ export class Snake {
   }
   reset(newStartPosition) {
     //återställer segment-listan
-    this.segments = [
+    this.snake = [
       { x: newStartPos.x, y: newStartPos.y },
       { x: newStartPos.x - 1, y: newStartPos.y },
     ];
