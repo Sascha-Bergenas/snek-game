@@ -15,7 +15,7 @@ export class Snake {
     { x: 0, y: 1 }   // ner
     { x: 0, y: -1 }  // upp
      */
-    this.direction = { x: 1, y: 0 }; // rör sig åt höger som standard på start
+    this.currentDirection = { x: 1, y: 0 }; // rör sig åt höger som standard på start
     this.nextDirection = { x: 1, y: 0 }; // kommande inputs
 
     this.shouldGrow = false;
@@ -27,23 +27,23 @@ export class Snake {
   setDirection(newDirection) {
     // hindrar 180 graders vändning
     const opposite =
-      newDirection.x === -this.direction.x &&
-      newDirection.y === -this.direction.y;
+      newDirection.x === -this.currentDirection.x &&
+      newDirection.y === -this.currentDirection.y;
     if (!opposite) {
       this.nextDirection = newDirection;
     }
   }
   moveSnake() {
     // applicera input för detta tick
-    this.direction = this.nextDirection;
+    this.currentDirection = this.nextDirection;
 
     // hämtar huvudets position
     const head = this.snake[0];
 
     // beräkna nytt huvud
     const newHead = {
-      x: head.x + this.direction.x,
-      y: head.y + this.direction.y,
+      x: head.x + this.currentDirection.x,
+      y: head.y + this.currentDirection.y,
     };
     // Lägg in nytt huvud först
     this.snake.unshift(newHead);
@@ -65,22 +65,22 @@ export class Snake {
   }
   //  kontrollera ifall huvudet är i kroppen
   collideWithSelf() {
-    const head = this.getHead();
-    for (let i = 1; i < globalThis.snake.length; i++) {
-      const segment = this.snake[i];
-      if (segment.x === head.x && segment.y === head.y) {
+    const head = this.getSnakeHead();
+    for (let i = 1; i < this.snake.length; i++) {
+      const snakePart = this.snake[i];
+      if (snakePart.x === head.x && snakePart.y === head.y) {
         return true;
       }
     }
-    return true;
+    return false;
   }
   reset(newStartPosition) {
-    //återställer segment-listan
+    //återställer snakePart-listan
     this.snake = [
-      { x: newStartPos.x, y: newStartPos.y },
-      { x: newStartPos.x - 1, y: newStartPos.y },
+      { x: newStartPosition.x, y: newStartPosition.y },
+      { x: newStartPosition.x - 1, y: newStartPosition.y },
     ];
-    this.direction = { x: 1, y: 0 };
+    this.currentDirection = { x: 1, y: 0 };
     this.nextDirection = { x: 1, y: 0 };
 
     this.shouldGrow = false;
