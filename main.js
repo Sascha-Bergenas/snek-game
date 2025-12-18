@@ -5,6 +5,22 @@ import { Snake } from "./snake.js";
 // import { gameTick } from "./gameTick.js";
 
 // ======================
+// Konfiguration
+// ======================
+
+const snakeColors = [
+  "lime",
+  "cyan",
+  "orange",
+  "yellow",
+  "magenta",
+  "white",
+  "mistyrose",
+];
+
+let currentColorIndex = 0;
+
+// ======================
 // 1. Canvas och rendering
 // ======================
 
@@ -30,7 +46,12 @@ canvas.height = boardRows * cellSize;
 // ======================
 
 const snakeStartPosition = { x: 10, y: 10 };
-const snake = new Snake(snakeStartPosition, "lime", "Snek");
+const snake = new Snake(
+  snakeStartPosition,
+  snakeColors[currentColorIndex],
+  "lime",
+  "Snek"
+);
 
 // ======================
 // 4. Spelloopen
@@ -97,6 +118,10 @@ function gameTick() {
 function handleGameOver() {
   clearInterval(gameInterval);
 
+  // byt färg
+  currentColorIndex = (currentColorIndex + 1) % snakeColors.length;
+  snake.color = snakeColors[currentColorIndex];
+
   // återställ ormen
   snake.reset(snakeStartPosition);
 
@@ -110,7 +135,6 @@ function handleGameOver() {
 
   // starta om spelloopen
   gameInterval = setInterval(gameTick, tickSpeed);
-  console.log("Game over");
 }
 
 let gameInterval = setInterval(gameTick, tickSpeed);
