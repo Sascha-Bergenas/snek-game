@@ -49,7 +49,6 @@ const snakeStartPosition = { x: 10, y: 10 };
 const snake = new Snake(
   snakeStartPosition,
   snakeColors[currentColorIndex],
-  "lime",
   "Snek"
 );
 
