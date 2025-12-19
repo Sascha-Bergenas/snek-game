@@ -1,5 +1,5 @@
 export class Snake {
-  constructor(snakePart, color = "green", name = "Player") {
+  constructor(snakePart, color, name = "Player") {
     // flyttar kroppen genom att lägga till nytt huvud och ta bort sista segmentet.
     this.snake = [
       {
