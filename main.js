@@ -6,13 +6,14 @@ import { setupInput } from "./input.js";
 // Konfiguration
 
 const snakeColors = [
-  "lime",
-  "cyan",
-  "mistyrose",
-  "orange",
-  "yellow",
-  "magenta",
-  "white",
+  "#7f7f7f",
+  "#4d4861",
+  "#6c757d",
+  "#3F3244",
+  "#495057",
+  "#2F2235",
+  "#adb5bd",
+  "#2f2235",
 ];
 
 let currentColorIndex = 0;
@@ -84,7 +85,7 @@ function gameTick() {
   board.drawGrid();
 
   // rita mat
-  board.drawCell(food.x, food.y, "red");
+  board.drawCell(food.x, food.y, "#8d0801");
 
   for (let part of snake.snake) {
     board.drawCell(part.x, part.y, snake.color);
