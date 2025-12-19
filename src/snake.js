@@ -1,7 +1,7 @@
 export class Snake {
-  constructor(snakePart, color, name = "Player") {
+  constructor(snakePart, color, name = "snek") {
     // flyttar kroppen genom att lägga till nytt huvud och ta bort sista segmentet.
-    this.snake = [
+    this.body = [
       {
         x: snakePart.x,
         y: snakePart.y,
@@ -38,7 +38,7 @@ export class Snake {
     this.currentDirection = this.nextDirection;
 
     // hämtar huvudets position
-    const head = this.snake[0];
+    const head = this.body[0];
 
     // beräkna nytt huvud
     const newHead = {
@@ -46,11 +46,11 @@ export class Snake {
       y: head.y + this.currentDirection.y,
     };
     // Lägg in nytt huvud först
-    this.snake.unshift(newHead);
+    this.body.unshift(newHead);
 
     // om ormen inte ska växa, ta bort sista segmentet
     if (!this.shouldGrow) {
-      this.snake.pop();
+      this.body.pop();
     } else {
       this.shouldGrow = false;
     }
@@ -61,13 +61,13 @@ export class Snake {
   }
   // kontrollera vart huvud är
   getSnakeHead() {
-    return this.snake[0];
+    return this.body[0];
   }
   //  kontrollera ifall huvudet är i kroppen
   collideWithSelf() {
     const head = this.getSnakeHead();
-    for (let i = 1; i < this.snake.length; i++) {
-      const snakePart = this.snake[i];
+    for (let i = 1; i < this.body.length; i++) {
+      const snakePart = this.body[i];
       if (snakePart.x === head.x && snakePart.y === head.y) {
         return true;
       }
@@ -76,7 +76,7 @@ export class Snake {
   }
   reset(newStartPosition) {
     //återställer snakePart-listan
-    this.snake = [
+    this.body = [
       { x: newStartPosition.x, y: newStartPosition.y },
       { x: newStartPosition.x - 1, y: newStartPosition.y },
     ];

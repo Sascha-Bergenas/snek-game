@@ -21,6 +21,16 @@ let currentColorIndex = 0;
 let isGameRunning = true;
 
 // Canvas och rendering
+function renderElements() {
+  board.drawBackground();
+  board.drawGrid();
+
+  board.drawCell(food.x, food.y, "#800e13");
+
+  for (let part of snake.body) {
+    board.drawCell(part.x, part.y, snake.color);
+  }
+}
 
 const canvas = document.querySelector("#game");
 const context = canvas.getContext("2d");
@@ -80,16 +90,7 @@ function gameTick() {
     handleGameOver();
     return;
   }
-  // rita om
-  board.drawBackground();
-  board.drawGrid();
-
-  // rita mat
-  board.drawCell(food.x, food.y, "#8d0801");
-
-  for (let part of snake.snake) {
-    board.drawCell(part.x, part.y, snake.color);
-  }
+  renderElements();
 }
 
 function handleGameOver() {
@@ -105,8 +106,6 @@ function handleGameOver() {
 }
 
 function restartGame() {
-  console.log("restartGame körs");
-
   // göm overlay
   gameOverOverlay.classList.remove("visible");
 
@@ -116,14 +115,7 @@ function restartGame() {
 
   isGameRunning = true;
 
-  // rita startläge
-  board.drawBackground();
-  board.drawGrid();
-  board.drawCell(food.x, food.y, "red");
-
-  for (let part of snake.snake) {
-    board.drawCell(part.x, part.y, snake.color);
-  }
+  renderElements();
 
   // starta loopen igen
   gameInterval = setInterval(gameTick, tickSpeed);

@@ -12,7 +12,7 @@ export function createFood(columns, rows, snake) {
 }
 
 function isOnSnake(food, snake) {
-  for (let part of snake.snake) {
+  for (let part of snake.body) {
     if (part.x === food.x && part.y === food.y) {
       return true;
     }

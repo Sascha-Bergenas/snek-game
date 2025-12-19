@@ -46,6 +46,7 @@ export class Board {
       this.cellSize
     );
   }
+
   isInside(column, row) {
     return column >= 0 && column < this.columns && row >= 0 && row < this.rows;
   }

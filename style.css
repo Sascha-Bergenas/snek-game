@@ -6,6 +6,9 @@ body {
   background-color: #a9aca9;
 }
 
+#game {
+  border: 5px solid #353535;
+}
 #game-over-overlay {
   position: absolute;
   inset: 0;
@@ -29,4 +32,5 @@ body {
 #game-over-overlay.visible {
   opacity: 1;
   pointer-events: auto;
+  background-color: #100f0f;
 }
