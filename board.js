@@ -37,7 +37,7 @@ export class Board {
       this.context.stroke();
     }
   }
-  drawCell(column, row, color = "lime") {
+  drawCell(column, row, color) {
     this.context.fillStyle = color;
     this.context.fillRect(
       column * this.cellSize,
@@ -45,5 +45,8 @@ export class Board {
       this.cellSize,
       this.cellSize
     );
+  }
+  isInside(column, row) {
+    return column >= 0 && column < this.columns && row >= 0 && row < this.rows;
   }
 }
