@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+#game-over-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: #05000099;
+
+  display: none;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: #4f0001;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 69px;
+  text-align: center;
+}
+
+#game-over-overlay.visible {
+  display: flex;
+}
