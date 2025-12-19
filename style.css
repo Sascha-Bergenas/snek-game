@@ -11,8 +11,10 @@ body {
   inset: 0;
 
   background: #05000099;
-
-  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+  display: flex;
+  opacity: 0;
 
   flex-direction: column;
   justify-content: center;
@@ -25,5 +27,6 @@ body {
 }
 
 #game-over-overlay.visible {
-  display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }

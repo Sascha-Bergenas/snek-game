@@ -25,7 +25,7 @@ let isGameRunning = true;
 const canvas = document.querySelector("#game");
 const context = canvas.getContext("2d");
 
-const gameOverOverlay = document.getElementById("game-over-overlay");
+const gameOverOverlay = document.querySelector("#game-over-overlay");
 
 //  Skapa board
 
@@ -93,7 +93,6 @@ function gameTick() {
 }
 
 function handleGameOver() {
-  console.log("handleGameOver körs");
   clearInterval(gameInterval);
   isGameRunning = false;
 
