@@ -2,6 +2,7 @@
 import { Board } from "./board.js";
 import { Snake } from "./snake.js";
 import { createFood } from "./food.js";
+import { setupInput } from "./input.js";
 
 // Konfiguration
 
@@ -112,7 +113,7 @@ function restartGame() {
 
   // reset speldata
   snake.reset(snakeStartPosition);
-  food = createFood();
+  food = createFood(boardColumns, boardRows, snake);
 
   isGameRunning = true;
 
@@ -129,32 +130,10 @@ function restartGame() {
   gameInterval = setInterval(gameTick, tickSpeed);
 }
 
-let gameInterval = setInterval(gameTick, tickSpeed);
-
-//  Tangentbord → riktning
-
-window.addEventListener("keydown", (event) => {
-  if (!isGameRunning && event.code === "Space") {
-    restartGame();
-    return;
-  }
-
+setupInput(snake, () => {
   if (!isGameRunning) {
-    return;
-  }
-
-  switch (event.key) {
-    case "ArrowUp":
-      snake.setDirection({ x: 0, y: -1 });
-      break;
-    case "ArrowDown":
-      snake.setDirection({ x: 0, y: 1 });
-      break;
-    case "ArrowLeft":
-      snake.setDirection({ x: -1, y: 0 });
-      break;
-    case "ArrowRight":
-      snake.setDirection({ x: 1, y: 0 });
-      break;
+    restartGame();
   }
 });
+
+let gameInterval = setInterval(gameTick, tickSpeed);
