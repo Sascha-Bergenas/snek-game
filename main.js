@@ -1,4 +1,3 @@
-// importera klasser
 import { Board } from "./board.js";
 import { Snake } from "./snake.js";
 import { createFood } from "./food.js";
